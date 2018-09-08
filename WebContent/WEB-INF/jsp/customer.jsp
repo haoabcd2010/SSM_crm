@@ -284,7 +284,7 @@
 							</tbody>
 						</table>
 						<div class="col-md-12 text-right">
-							<itcast:page url="${pageContext.request.contextPath }/customer/list.action" />
+							<itcast:page url="${pageContext.request.contextPath }/customer/list" />
 						</div>
 						<!-- /.panel-body -->
 					</div>
