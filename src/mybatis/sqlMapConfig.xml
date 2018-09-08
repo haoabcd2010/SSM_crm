@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+        
+<configuration>
+  <typeAliases>
+    <!-- 别名配置，扫描包,类名就是别名,可以在mapper.xml中简写 -->
+	<package name="com.happycode.po"/>
+  </typeAliases>
+  <!-- mapper的扫描都交给mybatis-spring了,配置在applicationContext-dao.xml  -->
+</configuration>

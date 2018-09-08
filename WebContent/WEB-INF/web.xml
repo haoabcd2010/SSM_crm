@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>crm</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <!-- NamingException -->
+  <context-param>
+    <param-name>spring.profiles.active</param-name>
+    <param-value>dev</param-value>
+  </context-param>
+  <context-param>
+    <param-name>spring.profiles.default</param-name>
+    <param-value>dev</param-value>
+  </context-param>
+  <context-param>
+    <param-name>spring.liveBeansView.mbeanDomain</param-name>
+    <param-value>dev</param-value>
+  </context-param>
+  
+  
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>classpath:spring/applicationContext-*.xml</param-value>
+  </context-param>
+  
+  <!-- 监听程序启动，然后加载spring的配置文件 -->
+  <listener>
+  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+  
+  <!-- POST请求转码 -->
+  <filter>
+  	<filter-name>encoding</filter-name>
+  	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  	<init-param>
+  	  <param-name>encoding</param-name>
+  	  <param-value>UTF-8</param-value>
+  	</init-param>
+  </filter>
+  
+  <!-- url-parttern和springmvc的拦截不一样
+    /* 所有
+  	*.action
+   -->
+  <filter-mapping>
+  	<filter-name>encoding</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  
+  <!-- springmvc前端控制器 -->
+  <servlet>
+    <servlet-name>springmvc</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+    	<!-- 默认找/WEB_INF/[servlet名]-servlet.xml -->
+    	<param-name>contextConfigLocation</param-name>
+    	<param-value>classpath:spring/springmvc.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>springmvc</servlet-name>
+    <!-- 
+    	/* 拦截所有(struts2 /* 拦截jsp)	真的全拦截，不建议使用
+    	*.action 拦截所有以.action结尾的请求	以.action结尾的请求，肯定能使用
+    	/ 拦截所有(不包括jsp) 包含(js, png, css)	强烈建议使用，需要配置静态资源放行
+    -->
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
